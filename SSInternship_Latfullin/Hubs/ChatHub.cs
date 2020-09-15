@@ -17,8 +17,11 @@ namespace SSInternship_Latfullin.Hubs
 
         public async Task Send(string name, string message)
         {
-            data.History.Add(name + " : " + message);
-            await Clients.All.SendAsync("Send", name, message);
+            if (name != null && name != "" && message != null && message != "")
+            {
+                data.History.Add(name + " : " + message);
+                await Clients.All.SendAsync("Send", name, message);
+            }
         }
 
         public override async Task OnConnectedAsync()
